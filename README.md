@@ -1,10 +1,10 @@
 # Walid Larbi — Portfolio
 
-Portfolio one-page pour Walid Larbi, Chef de Projet Digital en recherche d'alternance (12 mois).
+Portfolio one-page pour Walid Larbi, Chef de Projet Data en recherche d'alternance (24 mois).
 
 ## Apercu
 
-Site vitrine a destination des recruteurs, presentant le profil, les competences, le parcours professionnel et la formation de Walid Larbi.
+Site vitrine a destination des recruteurs, presentant le profil, les competences, le parcours professionnel, les projets et la formation de Walid Larbi.
 
 **Direction artistique** : design cyberpunk / futuriste avec fond sombre bleu nuit, accents cyan neon, grille HUD, typographie geometrique et animations immersives.
 
