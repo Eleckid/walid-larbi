@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <title>Walid Larbi — Chef de Projet Data</title>
     <meta name="description" content="Portfolio de Walid Larbi, Chef de projet Data en recherche d'alternance. Compétences en data, IA et gestion de projet." />
     <meta property="og:title" content="Walid Larbi — Chef de Projet Data" />
     <meta property="og:description" content="Portfolio de Walid Larbi, Chef de projet Data en recherche d'alternance." />
-    <meta property="og:image" content="assets/img/photo.png" />
+    <meta property="og:image" content="https://walid-larbi.netlify.app/assets/img/og-image.png" />
+    <meta property="og:url" content="https://walid-larbi.netlify.app/" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
     <!-- Fonts -->
@@ -16,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <!-- Tailwind CSS v4 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Tailwind theme (requis en inline pour le CDN) -->
     <style type="text/tailwindcss">
       @theme {
         --color-void: #050810;
@@ -37,695 +40,61 @@
         --font-body: "IBM Plex Sans", sans-serif;
         --font-mono: "JetBrains Mono", monospace;
       }
-
       html { scroll-padding-top: 5rem; }
-
-      body {
-        font-family: var(--font-body);
-        background: var(--color-void);
-        color: var(--color-txt);
-      }
-
-      /* ── Grid background pattern ── */
-      .grid-bg {
-        background-image:
-          linear-gradient(rgba(6, 214, 214, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(6, 214, 214, 0.03) 1px, transparent 1px);
-        background-size: 60px 60px;
-      }
-
-      .grid-bg-dense {
-        background-image:
-          linear-gradient(rgba(6, 214, 214, 0.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(6, 214, 214, 0.04) 1px, transparent 1px);
-        background-size: 30px 30px;
-      }
-
-      /* ── Section divider glow ── */
-      .section-glow-top::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--color-cyan-glow), transparent);
-      }
-
-      /* ── Enhanced section separator ── */
-      .section-separator {
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent 0%, rgba(6,214,214,0.0) 10%, rgba(6,214,214,0.5) 50%, rgba(6,214,214,0.0) 90%, transparent 100%);
-        position: relative;
-      }
-      .section-separator::after {
-        content: "";
-        position: absolute;
-        top: -4px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 10px;
-        height: 10px;
-        background: var(--color-cyan);
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-        box-shadow: 0 0 12px var(--color-cyan), 0 0 24px rgba(6,214,214,0.3);
-      }
-
-      /* ── Scanline overlay ── */
-      .scanlines::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 2px,
-          rgba(6, 214, 214, 0.008) 2px,
-          rgba(6, 214, 214, 0.008) 4px
-        );
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      /* ── Neon glow utilities ── */
-      .glow-cyan {
-        box-shadow: 0 0 20px rgba(6, 214, 214, 0.15), inset 0 0 20px rgba(6, 214, 214, 0.03);
-      }
-      .glow-cyan-strong {
-        box-shadow: 0 0 30px rgba(6, 214, 214, 0.25), 0 0 60px rgba(6, 214, 214, 0.08);
-      }
-      .text-glow {
-        text-shadow: 0 0 20px rgba(6, 214, 214, 0.4), 0 0 40px rgba(6, 214, 214, 0.15);
-      }
-
-      /* ── Hero particles ── */
-      @keyframes float-up {
-        0% { transform: translateY(100vh) scale(0); opacity: 0; }
-        10% { opacity: 1; }
-        90% { opacity: 1; }
-        100% { transform: translateY(-20vh) scale(1); opacity: 0; }
-      }
-
-      .particle {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: var(--color-cyan);
-        border-radius: 50%;
-        animation: float-up linear infinite;
-        box-shadow: 0 0 6px var(--color-cyan);
-      }
-
-      /* ── Section particles (slower, more ambient) ── */
-      @keyframes float-drift {
-        0% { transform: translateY(0) translateX(0); opacity: 0; }
-        15% { opacity: 0.6; }
-        85% { opacity: 0.6; }
-        100% { transform: translateY(-200px) translateX(40px); opacity: 0; }
-      }
-      .section-particle {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: var(--color-cyan);
-        border-radius: 50%;
-        animation: float-drift linear infinite;
-        box-shadow: 0 0 4px var(--color-cyan);
-        pointer-events: none;
-      }
-
-      @keyframes pulse-ring {
-        0% { transform: scale(0.8); opacity: 0.6; }
-        50% { transform: scale(1.1); opacity: 0.2; }
-        100% { transform: scale(0.8); opacity: 0.6; }
-      }
-
-      /* ── Scroll indicator ── */
-      @keyframes bounce-soft {
-        0%, 100% { transform: translateY(0); opacity: 0.4; }
-        50% { transform: translateY(8px); opacity: 0.9; }
-      }
-      .scroll-hint { animation: bounce-soft 2s ease-in-out infinite; }
-
-      /* ── Glass nav ── */
-      .nav-hud {
-        background: rgba(10, 15, 26, 0.8);
-        backdrop-filter: blur(16px) saturate(1.3);
-        -webkit-backdrop-filter: blur(16px) saturate(1.3);
-        border: 1px solid var(--color-edge);
-      }
-
-      /* ── HUD corner decoration ── */
-      .hud-corners {
-        position: relative;
-      }
-      .hud-corners::before,
-      .hud-corners::after {
-        content: "";
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        border-color: var(--color-cyan);
-        opacity: 0.4;
-      }
-      .hud-corners::before {
-        top: -1px;
-        left: -1px;
-        border-top: 1px solid;
-        border-left: 1px solid;
-      }
-      .hud-corners::after {
-        bottom: -1px;
-        right: -1px;
-        border-bottom: 1px solid;
-        border-right: 1px solid;
-      }
-
-      /* ── Progress bars ── */
-      .progress-track {
-        height: 3px;
-        background: var(--color-edge);
-        position: relative;
-        overflow: hidden;
-      }
-      .progress-fill {
-        height: 100%;
-        background: linear-gradient(90deg, var(--color-cyan), var(--color-cyan-bright));
-        width: 0%;
-        transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-        box-shadow: 0 0 8px var(--color-cyan-glow);
-      }
-
-      /* ── Timeline ── */
-      .tl-line {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: linear-gradient(180deg, var(--color-cyan), var(--color-cyan-glow), var(--color-edge), transparent);
-        box-shadow: 0 0 8px rgba(6,214,214,0.2), 0 0 16px rgba(6,214,214,0.1);
-      }
-
-      @keyframes tl-glow-pulse {
-        0%, 100% { box-shadow: 0 0 8px rgba(6,214,214,0.2), 0 0 16px rgba(6,214,214,0.1); }
-        50% { box-shadow: 0 0 14px rgba(6,214,214,0.4), 0 0 28px rgba(6,214,214,0.2); }
-      }
-      .tl-line { animation: tl-glow-pulse 3s ease-in-out infinite; }
-
-      .tl-dot {
-        width: 10px;
-        height: 10px;
-        background: var(--color-cyan);
-        position: absolute;
-        left: -4px;
-        top: 6px;
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-        box-shadow: 0 0 10px var(--color-cyan), 0 0 20px rgba(6,214,214,0.3);
-      }
-
-      @keyframes dot-pulse {
-        0%, 100% { box-shadow: 0 0 10px var(--color-cyan), 0 0 20px rgba(6,214,214,0.3); transform: scale(1); }
-        50% { box-shadow: 0 0 16px var(--color-cyan), 0 0 32px rgba(6,214,214,0.5); transform: scale(1.2); }
-      }
-      .tl-dot { animation: dot-pulse 2.5s ease-in-out infinite; }
-
-      /* ── Card ── */
-      .card-panel {
-        background: var(--color-panel);
-        border: 1px solid var(--color-edge);
-        transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
-      }
-      .card-panel:hover {
-        border-color: var(--color-cyan-dim);
-        box-shadow: 0 0 24px rgba(6, 214, 214, 0.06), inset 0 0 24px rgba(6, 214, 214, 0.02);
-        transform: translateY(-2px);
-      }
-
-      /* ── Enhanced card with animated border ── */
-      .card-enhanced {
-        position: relative;
-        background: var(--color-panel);
-        border: 1px solid var(--color-edge);
-        transition: all 0.4s ease;
-        overflow: hidden;
-      }
-      .card-enhanced::before {
-        content: "";
-        position: absolute;
-        inset: -1px;
-        background: linear-gradient(135deg, transparent 30%, rgba(6,214,214,0.2) 50%, transparent 70%);
-        background-size: 300% 300%;
-        animation: gradient-sweep 6s ease-in-out infinite;
-        z-index: -1;
-        border-radius: inherit;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-      .card-enhanced:hover::before {
-        opacity: 1;
-      }
-      .card-enhanced:hover {
-        border-color: rgba(6,214,214,0.3);
-        box-shadow: 0 0 30px rgba(6,214,214,0.08), 0 0 60px rgba(6,214,214,0.04), inset 0 0 30px rgba(6,214,214,0.02);
-        transform: translateY(-3px);
-      }
-
-      @keyframes gradient-sweep {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-
-      /* ── Featured skill card with animated gradient border ── */
-      .featured-skill {
-        background: linear-gradient(135deg, var(--color-panel), var(--color-deep));
-        border: 1px solid var(--color-edge);
-        position: relative;
-        overflow: hidden;
-      }
-      .featured-skill::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        right: -50%;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle, rgba(6, 214, 214, 0.05) 0%, transparent 70%);
-      }
-
-      /* ── Animated gradient border wrapper ── */
-      .gradient-border-wrap {
-        position: relative;
-        padding: 2px;
-        border-radius: 4px;
-        background: linear-gradient(135deg, rgba(6,214,214,0.3), rgba(139,92,246,0.2), rgba(6,214,214,0.1), rgba(139,92,246,0.3));
-        background-size: 300% 300%;
-        animation: gradient-border-spin 4s ease infinite;
-      }
-      @keyframes gradient-border-spin {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-      .gradient-border-wrap > .inner {
-        background: linear-gradient(135deg, var(--color-panel), var(--color-deep));
-        border-radius: 3px;
-      }
-
-      /* ── Mini grid cards ── */
-      .mini-grid-card {
-        background: var(--color-panel);
-        border: 1px solid var(--color-edge);
-        transition: all 0.3s;
-        cursor: default;
-      }
-      .mini-grid-card:hover {
-        border-color: rgba(6, 214, 214, 0.3);
-        transform: translateY(-1px);
-        box-shadow: 0 0 16px rgba(6, 214, 214, 0.05);
-      }
-      .mini-grid-card .skill-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 8px;
-        background: rgba(6, 214, 214, 0.08);
-        border: 1px solid rgba(6, 214, 214, 0.15);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-
-      /* ── XP card v2 ── */
-      .xp-card-v2 {
-        background: var(--color-panel);
-        border: 1px solid var(--color-edge);
-        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      }
-      .xp-card-v2:hover {
-        border-color: rgba(6, 214, 214, 0.25);
-        box-shadow: 0 0 30px rgba(6, 214, 214, 0.06), inset 0 1px 0 rgba(6, 214, 214, 0.1);
-        transform: translateY(-3px);
-      }
-
-      /* ── Interest cards ── */
-      .interest-card {
-        background: var(--color-panel);
-        border: 1px solid var(--color-edge);
-        transition: all 0.4s ease;
-      }
-      .interest-card:hover {
-        border-color: rgba(6, 214, 214, 0.3);
-        box-shadow: 0 0 20px rgba(6, 214, 214, 0.08);
-        transform: translateY(-2px);
-      }
-
-      /* ── Reveal animation base ── */
-      .reveal { opacity: 0; transform: translateY(20px); }
-
-      /* ── Tag pill ── */
-      .tag-cyber {
-        background: rgba(6, 214, 214, 0.06);
-        border: 1px solid rgba(6, 214, 214, 0.15);
-        color: var(--color-cyan);
-        transition: all 0.3s ease;
-      }
-      .tag-cyber:hover {
-        background: rgba(6, 214, 214, 0.12);
-        border-color: rgba(6, 214, 214, 0.35);
-        box-shadow: 0 0 12px rgba(6, 214, 214, 0.08);
-      }
-
-      /* ── Enhanced glowing tags ── */
-      .tag-glow {
-        background: rgba(6, 214, 214, 0.08);
-        border: 1px solid rgba(6, 214, 214, 0.2);
-        color: var(--color-cyan);
-        transition: all 0.3s ease;
-        text-shadow: 0 0 6px rgba(6,214,214,0.3);
-      }
-      .tag-glow:hover {
-        background: rgba(6, 214, 214, 0.15);
-        border-color: rgba(6, 214, 214, 0.5);
-        box-shadow: 0 0 16px rgba(6, 214, 214, 0.15), 0 0 32px rgba(6,214,214,0.05);
-        text-shadow: 0 0 10px rgba(6,214,214,0.5);
-      }
-
-      /* ── Glitch text effect (scramble only, no overlays) ── */
-      .glitch-text {
-        display: inline-block;
-      }
-
-      /* ── Typing cursor ── */
-      @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
-      }
-      .cursor-blink::after {
-        content: "_";
-        animation: blink 1s step-end infinite;
-        color: var(--color-cyan);
-      }
-
-      /* ── Photo frame animated glow ── */
-      @keyframes photo-glow {
-        0%, 100% { box-shadow: 0 0 20px rgba(6,214,214,0.1), 0 0 40px rgba(6,214,214,0.05), inset 0 0 20px rgba(6,214,214,0.02); border-color: rgba(6,214,214,0.2); }
-        50% { box-shadow: 0 0 30px rgba(6,214,214,0.2), 0 0 60px rgba(6,214,214,0.1), inset 0 0 30px rgba(6,214,214,0.04); border-color: rgba(6,214,214,0.4); }
-      }
-      .photo-frame-glow {
-        animation: photo-glow 3s ease-in-out infinite;
-        border: 1px solid rgba(6,214,214,0.2);
-      }
-
-      /* ── Photo scanlines ── */
-      .photo-scanlines::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: repeating-linear-gradient(
-          0deg, transparent, transparent 3px,
-          rgba(6,214,214,0.03) 3px, rgba(6,214,214,0.03) 6px
-        );
-        pointer-events: none;
-        border-radius: inherit;
-      }
-
-      /* ── Decorative diamond separator ── */
-      .diamond-separator {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin: 16px 0;
-      }
-      .diamond-separator .line {
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(6,214,214,0.3), transparent);
-      }
-      .diamond-separator .diamond {
-        width: 8px;
-        height: 8px;
-        background: var(--color-cyan);
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-        box-shadow: 0 0 8px var(--color-cyan);
-        flex-shrink: 0;
-      }
-
-      /* ── Diagonal gradient sweep (section bg) ── */
-      @keyframes diagonal-sweep {
-        0% { background-position: -200% -200%; }
-        100% { background-position: 200% 200%; }
-      }
-      .diagonal-sweep-bg {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, transparent 40%, rgba(6,214,214,0.02) 50%, transparent 60%);
-        background-size: 400% 400%;
-        animation: diagonal-sweep 8s linear infinite;
-        pointer-events: none;
-      }
-
-      /* ── Hexagon decoration ── */
-      .hex-deco {
-        width: 60px;
-        height: 52px;
-        background: rgba(6,214,214,0.03);
-        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-        border: 1px solid rgba(6,214,214,0.1);
-        position: absolute;
-      }
-
-      /* ── Circuit pattern ── */
-      .circuit-pattern {
-        position: absolute;
-        inset: 0;
-        background-image:
-          linear-gradient(0deg, transparent 49.5%, rgba(6,214,214,0.02) 49.5%, rgba(6,214,214,0.02) 50.5%, transparent 50.5%),
-          linear-gradient(90deg, transparent 49.5%, rgba(6,214,214,0.02) 49.5%, rgba(6,214,214,0.02) 50.5%, transparent 50.5%);
-        background-size: 80px 80px;
-        pointer-events: none;
-      }
-      .circuit-pattern::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image:
-          radial-gradient(circle 2px at 50% 50%, rgba(6,214,214,0.06) 0%, transparent 100%);
-        background-size: 80px 80px;
-      }
-
-      /* ── Diagonal lines pattern ── */
-      .diagonal-pattern {
-        position: absolute;
-        inset: 0;
-        background-image: repeating-linear-gradient(
-          -45deg, transparent, transparent 40px,
-          rgba(6,214,214,0.015) 40px, rgba(6,214,214,0.015) 41px
-        );
-        pointer-events: none;
-      }
-
-      /* ── Stat card pulse border ── */
-      @keyframes border-pulse {
-        0%, 100% { border-color: var(--color-edge); box-shadow: none; }
-        50% { border-color: rgba(6,214,214,0.3); box-shadow: 0 0 16px rgba(6,214,214,0.06), inset 0 0 12px rgba(6,214,214,0.02); }
-      }
-      .stat-card-pulse:hover {
-        animation: border-pulse 2s ease-in-out infinite;
-      }
-
-      /* ── Timeline experience card ── */
-      .xp-card {
-        background: rgba(26,35,50,0.6);
-        border: 1px solid var(--color-edge);
-        backdrop-filter: blur(8px);
-        transition: all 0.4s ease;
-      }
-      .xp-card:hover {
-        border-color: rgba(6,214,214,0.25);
-        box-shadow: 0 0 24px rgba(6,214,214,0.06), inset 0 0 20px rgba(6,214,214,0.02);
-        transform: translateX(4px);
-      }
-
-      /* ── XP icon container ── */
-      .xp-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-        background: rgba(6,214,214,0.06);
-        border: 1px solid rgba(6,214,214,0.15);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-
-      /* ── Formation card counter ── */
-      .formation-counter {
-        position: absolute;
-        top: -1px;
-        right: 16px;
-        font-family: var(--font-display);
-        font-size: 4rem;
-        font-weight: 700;
-        line-height: 1;
-        color: rgba(6,214,214,0.04);
-        pointer-events: none;
-        user-select: none;
-      }
-
-      /* ── Formation gradient border hover ── */
-      @keyframes formation-border-glow {
-        0% { border-color: var(--color-edge); }
-        50% { border-color: rgba(6,214,214,0.35); }
-        100% { border-color: var(--color-edge); }
-      }
-      .formation-card {
-        position: relative;
-        overflow: hidden;
-        background: var(--color-panel);
-        border: 1px solid var(--color-edge);
-        transition: all 0.4s ease;
-      }
-      .formation-card::after {
-        content: "";
-        position: absolute;
-        inset: -1px;
-        background: linear-gradient(135deg, rgba(6,214,214,0.2), transparent 40%, transparent 60%, rgba(139,92,246,0.2));
-        opacity: 0;
-        transition: opacity 0.5s ease;
-        pointer-events: none;
-        z-index: 0;
-        border-radius: inherit;
-      }
-      .formation-card:hover::after {
-        opacity: 1;
-      }
-      .formation-card:hover {
-        border-color: rgba(6,214,214,0.3);
-        box-shadow: 0 0 30px rgba(6,214,214,0.08), inset 0 0 20px rgba(6,214,214,0.02);
-        transform: translateY(-3px);
-      }
-      .formation-card > * { position: relative; z-index: 1; }
-
-      /* ── Contact pulsing rings ── */
-      @keyframes contact-ring-pulse {
-        0% { transform: translate(-50%,-50%) scale(0.6); opacity: 0.4; }
-        100% { transform: translate(-50%,-50%) scale(2.5); opacity: 0; }
-      }
-      .contact-ring {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 80px;
-        height: 80px;
-        border: 1px solid rgba(6,214,214,0.2);
-        border-radius: 50%;
-        animation: contact-ring-pulse 3s ease-out infinite;
-        pointer-events: none;
-      }
-
-      /* ── Contact card glow on hover ── */
-      .contact-card {
-        background: var(--color-panel);
-        border: 1px solid var(--color-edge);
-        transition: all 0.4s ease;
-        position: relative;
-        overflow: hidden;
-      }
-      .contact-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at 50% 0%, rgba(6,214,214,0.06) 0%, transparent 70%);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-      .contact-card:hover::before {
-        opacity: 1;
-      }
-      .contact-card:hover {
-        border-color: rgba(6,214,214,0.4);
-        box-shadow: 0 0 30px rgba(6,214,214,0.12), 0 0 60px rgba(6,214,214,0.04), inset 0 0 20px rgba(6,214,214,0.03);
-        transform: translateY(-4px);
-      }
-
-      /* ── CTA pulsing glow ring ── */
-      @keyframes cta-glow-ring {
-        0% { box-shadow: 0 0 0 0 rgba(6,214,214,0.3); }
-        70% { box-shadow: 0 0 0 12px rgba(6,214,214,0); }
-        100% { box-shadow: 0 0 0 0 rgba(6,214,214,0); }
-      }
-      .cta-pulse {
-        animation: cta-glow-ring 2s ease-out infinite;
-      }
-
-      /* ── Connection lines between contact cards ── */
-      .connection-lines {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 0;
-      }
-      .connection-lines svg {
-        width: 100%;
-        height: 100%;
-      }
-
-      /* ── HUD data label ── */
-      .hud-label {
-        font-family: var(--font-mono);
-        font-size: 9px;
-        color: rgba(6,214,214,0.35);
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        position: absolute;
-        pointer-events: none;
-        user-select: none;
-      }
-
-      /* ── Corner bracket decoration ── */
-      .corner-bracket {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        pointer-events: none;
-      }
-      .corner-bracket.tl { top: 12px; left: 12px; border-top: 1px solid rgba(6,214,214,0.15); border-left: 1px solid rgba(6,214,214,0.15); }
-      .corner-bracket.tr { top: 12px; right: 12px; border-top: 1px solid rgba(6,214,214,0.15); border-right: 1px solid rgba(6,214,214,0.15); }
-      .corner-bracket.bl { bottom: 12px; left: 12px; border-bottom: 1px solid rgba(6,214,214,0.15); border-left: 1px solid rgba(6,214,214,0.15); }
-      .corner-bracket.br { bottom: 12px; right: 12px; border-bottom: 1px solid rgba(6,214,214,0.15); border-right: 1px solid rgba(6,214,214,0.15); }
-
-      /* ── Glowing separator line ── */
-      .glow-line {
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(6,214,214,0.4), transparent);
-        box-shadow: 0 0 8px rgba(6,214,214,0.15);
-        margin: 16px 0;
-      }
-
-      /* ── Section data overlay ── */
-      @keyframes data-flicker {
-        0%, 92%, 100% { opacity: 0.25; }
-        93% { opacity: 0.1; }
-        95% { opacity: 0.3; }
-      }
-      .data-flicker {
-        animation: data-flicker 4s ease-in-out infinite;
+      body { font-family: var(--font-body); background: var(--color-void); color: var(--color-txt); }
+    </style>
+    <!-- Variables CSS dupliquées pour le fichier externe (Tailwind @theme ne les expose pas en :root) -->
+    <style>
+      :root {
+        --color-void: #050810;
+        --color-deep: #0a0f1a;
+        --color-surface: #111827;
+        --color-panel: #1a2332;
+        --color-edge: #1e3048;
+        --color-edge-light: #2a4060;
+        --color-cyan: #06d6d6;
+        --color-cyan-bright: #22f0f0;
+        --color-cyan-dim: #06d6d620;
+        --color-cyan-glow: #06d6d640;
+        --color-violet: #8b5cf6;
+        --color-violet-dim: #8b5cf620;
+        --color-txt: #e2e8f0;
+        --color-txt-mid: #94a3b8;
+        --color-txt-dim: #475569;
+        --font-display: "Chakra Petch", sans-serif;
+        --font-body: "IBM Plex Sans", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
       }
     </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
 
   <body class="overflow-x-hidden">
+
+    <!-- Custom cursor -->
+    <div id="cursor-dot" style="position:fixed;top:0;left:0;width:6px;height:6px;background:#06d6d6;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 8px #06d6d6,0 0 16px rgba(6,214,214,0.3);transition:width 0.2s,height 0.2s,background 0.2s;"></div>
+    <div id="cursor-ring" style="position:fixed;top:0;left:0;width:36px;height:36px;border:1.5px solid rgba(6,214,214,0.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s,border-width 0.3s;"></div>
+    <div id="cursor-trail" style="position:fixed;top:0;left:0;width:60px;height:60px;pointer-events:none;z-index:99997;transform:translate(-50%,-50%);opacity:0.15;">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <line x1="30" y1="0" x2="30" y2="18" stroke="#06d6d6" stroke-width="0.5"/>
+        <line x1="30" y1="42" x2="30" y2="60" stroke="#06d6d6" stroke-width="0.5"/>
+        <line x1="0" y1="30" x2="18" y2="30" stroke="#06d6d6" stroke-width="0.5"/>
+        <line x1="42" y1="30" x2="60" y2="30" stroke="#06d6d6" stroke-width="0.5"/>
+        <rect x="22" y="22" width="16" height="16" stroke="#06d6d6" stroke-width="0.3" transform="rotate(45 30 30)"/>
+      </svg>
+    </div>
 
     <!-- ═══════════ NAV ═══════════ -->
     <nav class="fixed w-full top-4 left-0 right-0 z-50" id="main-nav">
       <div class="container mx-auto px-5">
         <div class="nav-hud rounded-sm px-6 py-3 flex items-center justify-between max-w-3xl mx-auto hud-corners">
-          <a href="#" class="font-display font-bold text-lg tracking-wider">Walid Larbi</a>
+          <a href="#" class="font-display font-bold text-lg tracking-wider group flex items-center gap-1.5">
+            <span class="text-txt group-hover:text-cyan transition-colors duration-300">Walid</span>
+            <span class="text-cyan text-glow">_</span>
+            <span class="text-txt group-hover:text-cyan transition-colors duration-300">Larbi</span>
+            <span class="text-violet animate-pulse text-sm">;</span>
+          </a>
           <ul class="hidden md:flex items-center gap-7 text-[11px] font-mono font-medium tracking-widest uppercase">
             <li><a href="#a-propos" class="nav-link text-txt-dim hover:text-cyan transition-colors duration-300">_about</a></li>
             <li><a href="#competences" class="nav-link text-txt-dim hover:text-cyan transition-colors duration-300">_skills</a></li>
@@ -855,7 +224,7 @@
                 <!-- Photo with animated frame -->
                 <div class="relative photo-frame-glow rounded-sm photo-scanlines">
                   <img src="assets/img/result_0.png" alt="Photo de Walid Larbi"
-                       class="relative w-64 sm:w-72 md:w-80 rounded-sm object-cover" loading="lazy" />
+                       class="relative w-64 sm:w-72 md:w-96 rounded-sm object-cover" loading="lazy" />
                 </div>
                 <!-- HUD overlay annotations -->
                 <div class="absolute top-3 left-3 font-mono text-[9px] text-cyan/60 tracking-widest">ID:WL_2026</div>
@@ -875,9 +244,9 @@
             <!-- Text -->
             <div class="lg:col-span-3 order-2">
               <div class="reveal">
-                <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase">// à propos</span>
+                <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase typing-label" data-type="// à propos"></span>
                 <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mt-3 uppercase tracking-tight font-bold">
-                  Profil<br/><span class="text-cyan text-glow">polyvalent</span>
+                  Profil<br/><span class="text-cyan text-glow typing-word" data-type="polyvalent"></span>
                 </h2>
                 <!-- Diamond separator -->
                 <div class="diamond-separator mt-5">
@@ -943,9 +312,9 @@
 
         <div class="container mx-auto px-5 max-w-6xl relative z-10">
           <div class="reveal text-center mb-10">
-            <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase">// compétences</span>
+            <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase typing-label" data-type="// compétences"></span>
             <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mt-3 uppercase tracking-tight font-bold">
-              Stack <span class="text-cyan text-glow">&amp; Skills</span>
+              Stack <span class="text-cyan text-glow typing-word" data-type="& Skills"></span>
             </h2>
           </div>
 
@@ -1033,9 +402,9 @@
 
         <div class="container mx-auto px-5 max-w-6xl relative z-10">
           <div class="reveal text-center mb-16">
-            <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase">// expériences</span>
+            <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase typing-label" data-type="// expériences"></span>
             <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mt-3 uppercase tracking-tight font-bold">
-              Mon <span class="text-cyan text-glow">parcours</span>
+              Mon <span class="text-cyan text-glow typing-word" data-type="parcours"></span>
             </h2>
             <div class="glow-line max-w-xs mx-auto mt-4" aria-hidden="true"></div>
           </div>
@@ -1186,9 +555,9 @@
 
         <div class="container mx-auto px-5 max-w-4xl relative z-10">
           <div class="reveal text-center mb-16">
-            <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase">// formation</span>
+            <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase typing-label" data-type="// formation"></span>
             <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mt-3 uppercase tracking-tight font-bold">
-              Éducation <span class="text-cyan text-glow">&amp; cursus</span>
+              Éducation <span class="text-cyan text-glow typing-word" data-type="& cursus"></span>
             </h2>
             <div class="glow-line max-w-xs mx-auto mt-4" aria-hidden="true"></div>
           </div>
@@ -1277,7 +646,7 @@
           <!-- Projet Académique -->
           <div class="reveal mt-16">
             <div class="text-center mb-8">
-              <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase">// projet académique</span>
+              <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase typing-label" data-type="// projet académique"></span>
             </div>
             <div class="gradient-border-wrap">
               <div class="inner featured-skill rounded-sm p-6 sm:p-8 hud-corners">
@@ -1305,19 +674,21 @@
           <!-- Centres d'intérêt -->
           <div class="reveal mt-20">
             <div class="text-center mb-8">
-              <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase">// centres d'intérêt</span>
+              <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase typing-label" data-type="// centres d'intérêt"></span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div class="interest-card rounded-sm p-5 text-center hud-corners">
                 <div class="w-12 h-12 rounded-lg bg-cyan/10 border border-cyan/20 flex items-center justify-center mx-auto mb-3">
-                  <svg class="w-6 h-6 text-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z"/></svg>
+                  <!-- Masques de théâtre -->
+                  <svg class="w-6 h-6 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4c0 0 2-2 6-2s6 2 6 2v7c0 3.5-2.5 6.5-6 7-3.5-.5-6-3.5-6-7V4z"/><path d="M5.5 9a.5.5 0 100-1 .5.5 0 000 1z" fill="currentColor"/><path d="M10.5 9a.5.5 0 100-1 .5.5 0 000 1z" fill="currentColor"/><path d="M5.5 12.5c1 1 3 1 5 0"/><path d="M16 8c0 0 2-2 6-2v7c0 3.5-2.5 6.5-6 7-1.5-.2-2.8-.8-3.8-1.7"/><path d="M19.5 11a.5.5 0 100-1 .5.5 0 000 1z" fill="currentColor"/><path d="M17 14.5c.8-.8 2.2-.8 3 0"/></svg>
                 </div>
                 <p class="text-txt font-display text-sm font-semibold uppercase">Théâtre</p>
                 <p class="text-txt-dim text-[10px] font-mono mt-1">Cours & impro</p>
               </div>
               <div class="interest-card rounded-sm p-5 text-center hud-corners">
                 <div class="w-12 h-12 rounded-lg bg-cyan/10 border border-cyan/20 flex items-center justify-center mx-auto mb-3">
-                  <svg class="w-6 h-6 text-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.996.44-1.767 1.3-2.033 2.325a4.965 4.965 0 002.298 5.235m.783-7.56a4.965 4.965 0 011.563-.79M5.25 4.236V4.5m13.5-.264c.996.44 1.767 1.3 2.033 2.325a4.965 4.965 0 01-2.298 5.235m-.783-7.56a4.965 4.965 0 00-1.563-.79M18.75 4.236V4.5m-13.5 0c.264 0 .524.022.78.063m12.44-.063c-.264 0-.524.022-.78.063"/></svg>
+                  <!-- Ballon de football -->
+                  <svg class="w-6 h-6" viewBox="0 0 463 463" fill="none" stroke="#06d6d6" stroke-width="18"><path d="M231.5,15C350.9,15,448,112.1,448,231.5S350.9,448,231.5,448S15,350.9,15,231.5S112.1,15,231.5,15z"/><path d="M231.5,15l14,43.2l69.2,54.7h49.2M231.5,15l-14,43.2l-69.2,54.7H99.1M15,231.5l27.7,20.1l23.3,72.6l-10.8,33.4M448,231.5l-28.9,21l-22.2,71.6l10.9,33.6M157.5,435.1l30.8-22.4h86.4l30.8,22.4"/><path d="M227.1,134.6l-85.2,61.9l32.5,100.1h113.2l32.5-100.1l-85.2-61.9z"/><path d="M278.7,295.2h-94.4l-29.2-89.8l76.4-55.5l76.4,55.5L278.7,295.2z" fill="#06d6d6" opacity="0.15"/></svg>
                 </div>
                 <p class="text-txt font-display text-sm font-semibold uppercase">Football</p>
                 <p class="text-txt-dim text-[10px] font-mono mt-1">Sport collectif</p>
@@ -1331,7 +702,8 @@
               </div>
               <div class="interest-card rounded-sm p-5 text-center hud-corners">
                 <div class="w-12 h-12 rounded-lg bg-violet/10 border border-violet/20 flex items-center justify-center mx-auto mb-3">
-                  <svg class="w-6 h-6 text-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.491 48.491 0 01-4.163-.3c.186 1.613.166 3.264-.108 4.918A7.476 7.476 0 017.2 13.18a7.476 7.476 0 01-1.573 2.852c1.674.782 3.58 1.218 5.623 1.218 2.043 0 3.949-.436 5.623-1.218a7.476 7.476 0 01-1.573-2.852 7.475 7.475 0 01.927-1.838 48.48 48.48 0 01-4.163.3.64.64 0 01-.657-.643v0c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.035-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 18.75V21m6-3v3m6-3v3"/></svg>
+                  <!-- Manette de jeu -->
+                  <svg class="w-6 h-6 text-violet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h4m-2-2v4"/><path d="M15 12h.01M18 10h.01"/><path d="M17.32 5H6.68a4 4 0 00-3.978 3.59C2.2 12.4 1.8 15.4 1.5 17.6a2 2 0 001.7 2.27 2 2 0 002.1-.9l2.4-3.6a2 2 0 011.67-.87h5.26a2 2 0 011.67.87l2.4 3.6a2 2 0 002.1.9 2 2 0 001.7-2.27c-.3-2.2-.7-5.2-1.2-9.01A4 4 0 0017.32 5z"/></svg>
                 </div>
                 <p class="text-txt font-display text-sm font-semibold uppercase">Jeux Vidéo</p>
                 <p class="text-txt-dim text-[10px] font-mono mt-1">Gaming</p>
@@ -1370,9 +742,9 @@
               <div class="contact-ring" style="animation-delay:1s"></div>
               <div class="contact-ring" style="animation-delay:2s"></div>
             </div>
-            <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase relative z-10">// contact</span>
+            <span class="font-mono text-[11px] text-cyan tracking-[0.25em] uppercase relative z-10 typing-label" data-type="// contact"></span>
             <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mt-3 uppercase tracking-tight font-bold relative z-10">
-              Intéressé par<br/>mon <span class="text-cyan text-glow">profil</span> ?
+              Intéressé par<br/>mon <span class="text-cyan text-glow typing-word" data-type="profil"></span> ?
             </h2>
             <p class="text-txt-mid mt-5 text-sm sm:text-base max-w-lg mx-auto leading-relaxed font-light relative z-10">
               Disponible pour une alternance de 24 mois en tant que Chef de projet data.

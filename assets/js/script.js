@@ -2,6 +2,80 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("year").textContent = new Date().getFullYear();
   gsap.registerPlugin(ScrollTrigger);
 
+  /* ── Custom animated cursor ── */
+  const dot = document.getElementById("cursor-dot");
+  const ring = document.getElementById("cursor-ring");
+  const trail = document.getElementById("cursor-trail");
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+  let trailX = 0, trailY = 0;
+
+  // Hide cursor elements on touch devices
+  if ("ontouchstart" in window) {
+    [dot, ring, trail].forEach(el => el.style.display = "none");
+    document.body.style.cursor = "auto";
+  } else {
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left = mouseX + "px";
+      dot.style.top = mouseY + "px";
+    });
+
+    // Smooth follow for ring and trail
+    function animateCursor() {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      ring.style.left = ringX + "px";
+      ring.style.top = ringY + "px";
+
+      trailX += (mouseX - trailX) * 0.08;
+      trailY += (mouseY - trailY) * 0.08;
+      trail.style.left = trailX + "px";
+      trail.style.top = trailY + "px";
+
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover effect on interactive elements
+    const hoverTargets = "a, button, [role='button'], .card-panel, .mini-grid-card, .xp-card-v2, .interest-card, .contact-card, .formation-card, .tag-cyber, .tag-glow, input, textarea";
+    document.querySelectorAll(hoverTargets).forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        dot.style.width = "8px";
+        dot.style.height = "8px";
+        dot.style.background = "#8b5cf6";
+        dot.style.boxShadow = "0 0 12px #8b5cf6, 0 0 24px rgba(139,92,246,0.4)";
+        ring.style.width = "50px";
+        ring.style.height = "50px";
+        ring.style.borderColor = "rgba(139,92,246,0.6)";
+        ring.style.borderWidth = "2px";
+        trail.style.opacity = "0.25";
+      });
+      el.addEventListener("mouseleave", () => {
+        dot.style.width = "6px";
+        dot.style.height = "6px";
+        dot.style.background = "#06d6d6";
+        dot.style.boxShadow = "0 0 8px #06d6d6, 0 0 16px rgba(6,214,214,0.3)";
+        ring.style.width = "36px";
+        ring.style.height = "36px";
+        ring.style.borderColor = "rgba(6,214,214,0.5)";
+        ring.style.borderWidth = "1.5px";
+        trail.style.opacity = "0.15";
+      });
+    });
+
+    // Hide on mouse leave window
+    document.addEventListener("mouseleave", () => {
+      [dot, ring, trail].forEach(el => el.style.opacity = "0");
+    });
+    document.addEventListener("mouseenter", () => {
+      dot.style.opacity = "1";
+      ring.style.opacity = "1";
+      trail.style.opacity = "0.15";
+    });
+  }
+
   /* ── Hero Particles ── */
   const particleContainer = document.getElementById("particles");
   for (let i = 0; i < 25; i++) {
@@ -81,6 +155,64 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }, interval);
   }
+
+  /* ── Typing effect for About section ── */
+  function typeText(el, text, speed, callback) {
+    let i = 0;
+    el.textContent = "";
+    const timer = setInterval(() => {
+      el.textContent += text[i];
+      i++;
+      if (i >= text.length) {
+        clearInterval(timer);
+        el.classList.add("done");
+        if (callback) callback();
+      }
+    }, speed);
+  }
+
+  // Trigger typing when About section scrolls into view
+  document.querySelectorAll(".typing-label").forEach((el) => {
+    const text = el.dataset.type;
+    let triggered = false;
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 80%",
+      onEnter: () => {
+        if (triggered) return;
+        triggered = true;
+        typeText(el, text, 50);
+      },
+    });
+  });
+
+  document.querySelectorAll(".typing-word").forEach((el) => {
+    const text = el.dataset.type;
+    let triggered = false;
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 80%",
+      onEnter: () => {
+        if (triggered) return;
+        triggered = true;
+        setTimeout(() => typeText(el, text, 80), 600);
+      },
+    });
+  });
+
+  // Highlight keywords in About section on scroll
+  ScrollTrigger.create({
+    trigger: "#a-propos",
+    start: "top 50%",
+    onEnter: () => {
+      document.querySelectorAll("#a-propos strong").forEach((el, i) => {
+        el.classList.add("keyword-highlight");
+        setTimeout(() => {
+          el.style.backgroundSize = "100% 100%";
+        }, 300 + i * 400);
+      });
+    },
+  });
 
   /* ── Hero entrance ── */
   const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
