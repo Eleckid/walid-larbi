@@ -60,13 +60,3 @@ Compatible **GitHub Pages** et **Netlify** — hebergement statique, aucun build
 
 1. Glisser-deposer le dossier sur [app.netlify.com/drop](https://app.netlify.com/drop)
 2. Ou connecter le repo GitHub pour un deploiement automatique
-
-## Donnees
-
-Toutes les informations proviennent du CV de Walid Larbi. Aucune donnee n'est inventee.
-
-## Contact
-
-- **Email** : Walidlarbi49@gmail.com
-- **Telephone** : 07 62 52 32 27
-- **Localisation** : Ile-de-France
